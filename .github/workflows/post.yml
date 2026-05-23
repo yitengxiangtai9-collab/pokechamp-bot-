@@ -29,8 +29,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-      - run: npm ci
+      - run: npm install
       - run: node bot.js --type=tips
         env:
           TWITTER_APP_KEY: ${{ secrets.TWITTER_APP_KEY }}
@@ -46,8 +45,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-      - run: npm ci
+      - run: npm install
       - run: node bot.js --type=meta
         env:
           TWITTER_APP_KEY: ${{ secrets.TWITTER_APP_KEY }}
@@ -63,8 +61,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
-      - run: npm ci
+      - run: npm install
       - run: node bot.js --type=${{ github.event.inputs.post_type }}
         env:
           TWITTER_APP_KEY: ${{ secrets.TWITTER_APP_KEY }}
