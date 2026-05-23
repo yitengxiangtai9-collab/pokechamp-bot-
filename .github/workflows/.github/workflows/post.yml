@@ -1,4 +1,4 @@
-name: ポケチャン 自動投稿
+name: pokechamp-bot
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       post_type:
-        description: "投稿タイプ (tips / meta)"
+        description: "tips or meta"
         required: true
         default: "tips"
         type: choice
@@ -15,14 +15,13 @@ on:
           - tips
           - meta
       dry_run:
-        description: "DRY RUN（実際には投稿しない）"
+        description: "DRY RUN"
         required: false
         default: true
         type: boolean
 
 jobs:
   post-tips:
-    name: "バトルTips投稿（毎日）"
     if: github.event_name == 'schedule' && github.event.schedule == '0 0 * * *'
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +39,6 @@ jobs:
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
 
   post-meta:
-    name: "環境考察投稿（毎週月曜）"
     if: github.event_name == 'schedule' && github.event.schedule == '0 1 * * 1'
     runs-on: ubuntu-latest
     steps:
@@ -58,7 +56,6 @@ jobs:
           TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
 
   post-manual:
-    name: "手動投稿"
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
